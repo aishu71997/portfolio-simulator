@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Balance Management</title>
+    <style>
+        /* Basic styling for the page */
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px 30px;
+            font-size: 18px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: #45a049;
+        }
+
+        #payment-message {
+            margin-top: 20px;
+            font-size: 18px;
+            color: green;
+        }
+
+        #error-message {
+            margin-top: 20px;
+            font-size: 18px;
+            color: red;
+        }
+
+        /* Spinner styles */
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #3498db;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 2s linear infinite;
+            margin: 20px auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+    </style>
+</head>
+<body>
+
+    <h1>Manage Your Balance</h1>
+    <p>Click below to simulate a payment action.</p>
+
+    <!-- Display current balance -->
+    <div class="balance-section">
+        <h2 id="balance">Your Balance: $5000</h2> <!-- This balance will dynamically change -->
+    </div>
+
+    <!-- Buttons to simulate payment actions -->
+    <button id="addFundsButton" class="btn">Add Funds</button>
+    <button id="withdrawFundsButton" class="btn">Withdraw Funds</button>
+
+    <!-- Loading spinner and messages -->
+    <div id="payment-message"></div> <!-- Success or error message -->
+    <div id="error-message"></div> <!-- For errors -->
+    <div id="loading-spinner" class="spinner" style="display: none;"></div> <!-- Spinner -->
+
+    <script>
+        // Initial balance value
+        let balance = 5000;
+
+        // Simulate Add Funds
+        document.getElementById('addFundsButton').onclick = function() {
+            // Show loading spinner
+            document.getElementById('loading-spinner').style.display = 'block';
+            document.getElementById('payment-message').textContent = ''; // Clear any previous messages
+            document.getElementById('error-message').textContent = ''; // Clear any error messages
+
+            // Simulate success after 3 seconds (like a real payment request)
+            setTimeout(function() {
+                // Simulate a successful payment
+                let addedAmount = 50; // Amount to add
+                balance += addedAmount; // Update balance
+
+                // Update balance on the page
+                document.getElementById('balance').textContent = `Your Balance: $${balance}`;
+
+                // Show success message
+                document.getElementById('payment-message').textContent = `Payment successful! $${addedAmount} has been added to your balance.`;
+                
+                // Hide the loading spinner
+                document.getElementById('loading-spinner').style.display = 'none';
+            }, 3000); // 3 seconds delay to simulate the payment process
+        };
+
+        // Simulate Withdraw Funds
+        document.getElementById('withdrawFundsButton').onclick = function() {
+            // Show loading spinner
+            document.getElementById('loading-spinner').style.display = 'block';
+            document.getElementById('payment-message').textContent = ''; // Clear any previous messages
+            document.getElementById('error-message').textContent = ''; // Clear any error messages
+
+            // Simulate failure after 3 seconds (like a real payment failure)
+            setTimeout(function() {
+                // Simulate an error (payment failure)
+                document.getElementById('error-message').textContent = 'Payment failed! Unable to withdraw funds at the moment.';
+                
+                // Hide the loading spinner
+                document.getElementById('loading-spinner').style.display = 'none';
+            }, 3000); // 3 seconds delay to simulate the payment process
+        };
+    </script>
+
+</body>
+</html>
+
